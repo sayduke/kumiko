@@ -4,7 +4,7 @@
 
 import os
 import cv2 as cv
-
+from distutils.version import LooseVersion
 
 
 class Kumiko:
@@ -67,18 +67,18 @@ class Kumiko:
 		
 		# OpenCV 3.2+
 		# See https://docs.opencv.org/master/d4/d73/tutorial_py_contours_begin.html
+		contours=None 
+		hierarchy=None
 		
-		#im2, contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-		#cv.imwrite('tmp/contour.jpg',im2)
-		#cv.imwrite('tmp/hierarchy.jpg',hierarchy)
-		#print contours
-		
-		
-		# OpenCV 2.4
-		# https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html
-		
-		_, contours, hierarchy = cv.findContours(thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-		
+		if LooseVersion(cv.__version__) >= LooseVersion("3.2.0") :
+			im2, contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+			#cv.imwrite('tmp/contour.jpg',im2)
+			#cv.imwrite('tmp/hierarchy.jpg',hierarchy)
+			#print contours
+		else :
+			# OpenCV 2.4
+			# https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html
+			contours, hierarchy = cv.findContours(thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 		
 		# Get panels out of contours
 		for contour in contours:
