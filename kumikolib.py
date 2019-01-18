@@ -71,7 +71,7 @@ class Kumiko:
 		if LooseVersion(cv.__version__) >= LooseVersion("3.2.0") :
 			# OpenCV 3.2+
 			# See https://docs.opencv.org/master/d4/d73/tutorial_py_contours_begin.html
-			im2, contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+			_, contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 			#cv.imwrite('tmp/contour.jpg',im2)
 			#cv.imwrite('tmp/hierarchy.jpg',hierarchy)
 			#print contours
