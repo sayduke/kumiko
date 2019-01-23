@@ -1,9 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 
 
 import os
 import cv2 as cv
+from functools import cmp_to_key
 
 
 
@@ -114,7 +115,7 @@ class Kumiko:
 		
 		# Number infos['panels'] comics-wise (left to right for now)
 		self.gutterThreshold = sum(infos['size']) / 2 / 20
-		infos['panels'].sort(cmp=self.sort_panels)
+		infos['panels'].sort(key=cmp_to_key(self.sort_panels))
 		
 		# write panel numbers on debug img
 		fontRatio = sum(infos['size']) / 2 / 400
